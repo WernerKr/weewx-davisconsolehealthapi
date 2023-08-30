@@ -15,18 +15,24 @@ class DavisConsoleHealthAPIInstaller(ExtensionInstaller):
             version='0.30',
             name='davisconsolehealthapi',
             description='Collect and display station health information from the Davis Console API.',
-            author='uajqq, KW',
+            author='Krenn Werner',
             author_email='',
             data_services='user.davisconsolehealthapi.DavisConsoleHealthAPI',
             config = {
                 'davisconsolehealthapi': {
                     'data_binding': 'davisconsolehealthapi_binding',
-                    'station_id': '',
-                    'api_key': '',
-                    'api_secret': '',
+                    'station_id': '99999',
+                    'api_key': 'abcdefghijklmnopqrstuvwzyx123456',
+                    'api_secret': '123456abcdefghijklmnopqrstuvwxyz',
                     '#max_age': 'None - default = 2592000',
                     'packet_log': '0',
                     '#packet_log': '0= first check and log available sensortypes once at start,  5= log all (packets ...)',
+                },
+                'Engine': {
+                    'Services': {
+                        'data_services': 'user.davisconsolehealthapi.DavisConsoleHealthAPI,',
+                        '#data_services': 'user.davisconsolehealthapi.DavisConsoleHealthAPI,'
+                    }
                 },
                 'DataBindings': {
                     'davisconsolehealthapi_binding': {
