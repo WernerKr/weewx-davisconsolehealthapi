@@ -45,9 +45,9 @@ Right now, the service records the following information from the Davis Console 
 "bootloader_version":2
 "clock_source":2
 "app_uptime":1186355
-"battery_temp":33		it's not know is this is °C or what else (seems to be °C)
 "tx_kilobytes":181662
 
+"battery_temp":33		it's not know if this is Â°C or what else (seems to be Â°C)
 
 ## Installation
 Install the extension:
