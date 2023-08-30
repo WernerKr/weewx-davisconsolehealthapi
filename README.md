@@ -1,5 +1,7 @@
 # weewx-davisconsolehealthapi
-Collect and display station health information from the new Davis Console
+Collect and display station health information from the new Davis Console API
+
+Modified from author uajqq
 
 Weewx service that pulls device health (telemetry) information from Davis Instruments weather Console. 
 I made this extension for users like me who have the new DAVIS Console. 
@@ -43,7 +45,7 @@ Right now, the service records the following information from the Davis Console 
 "bootloader_version":2
 "clock_source":2
 "app_uptime":1186355
-"battery_temp":33		it's not know is this is Â°C or what else (seems to be Â°C)
+"battery_temp":33		it's not know is this is °C or what else (seems to be °C)
 "tx_kilobytes":181662
 
 

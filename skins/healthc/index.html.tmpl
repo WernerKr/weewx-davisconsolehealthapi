@@ -1,0 +1,102 @@
+## Copyright 2023 Werner Krenn
+## Distributed under terms of GPLv3.  See LICENSE.txt for your rights.
+#errorCatcher Echo
+#encoding UTF-8
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <META HTTP-EQUIV="Refresh" CONTENT="300">
+    <title>$station.location Telemetry</title>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="healthc.css"/>
+    <script src="healthc.js"></script>
+  </head>
+
+  <body onload="setup();">
+    #include "titlebar.inc"
+
+    <div id="contents">
+
+      <div id="widget_group">
+        #include "sensors.inc"
+      </div>
+
+      <div id="plot_group">
+        <div id="history_widget" class="widget">
+          <div id="plot_title" class="widget_title">$gettext("Telemetry"):&nbsp;&nbsp;
+            <a class="button_selected" id="button_history_day"
+               onclick="choose_history('day')">$gettext("Day")</a>
+            <a class="button" id="button_history_week"
+               onclick="choose_history('week')">$gettext("Week")</a>
+            <a class="button" id="button_history_month"
+               onclick="choose_history('month')">$gettext("Month")</a>
+            <a class="button" id="button_history_year"
+               onclick="choose_history('year')">$gettext("Year")</a>
+          </div>
+
+          <div id="history_day" class="plot_container">
+            #if $day($data_binding='davisconsolehealthapi_binding').consoleBatteryC.has_data
+            <img src="dayvoltConsole.png"        alt="$obs.label.consoleBatteryC"/>
+            #end if
+            #if $day($data_binding='davisconsolehealthapi_binding').rssiC.has_data
+            <img src="daysignalC.png"        alt="$obs.label.rssiC"/>
+            #end if
+            #if $day($data_binding='davisconsolehealthapi_binding').batteryCurrentC.has_data
+            <img src="daycurrentConsole.png"        alt="$obs.label.batteryCurrentC"/>
+            #end if
+            #if $day($data_binding='davisconsolehealthapi_binding').batteryTempC.has_data
+            <img src="daytempBatConsole.png"        alt="$obs.label.batteryTempC"/>
+            #end if
+          </div>
+          <div id="history_week" class="plot_container" style="display:none">
+            #if $week($data_binding='davisconsolehealthapi_binding').consoleBatteryC.has_data
+            <img src="weekvoltConsole.png"        alt="$obs.label.consoleBatteryC"/>
+            #end if
+            #if $week($data_binding='davisconsolehealthapi_binding').rssiC.has_data
+            <img src="weeksignalC.png"        alt="$obs.label.rssiC"/>
+            #end if
+            #if $week($data_binding='davisconsolehealthapi_binding').batteryCurrentC.has_data
+            <img src="weekcurrentConsole.png"        alt="$obs.label.batteryCurrentC"/>
+            #end if
+            #if $week($data_binding='davisconsolehealthapi_binding').batteryTempC.has_data
+            <img src="weektempBatConsole.png"        alt="$obs.label.batteryTempC"/>
+            #end if
+          </div>
+          <div id="history_month" class="plot_container" style="display:none">
+            #if $month($data_binding='davisconsolehealthapi_binding').consoleBatteryC.has_data
+            <img src="monthvoltConsole.png"        alt="$obs.label.consoleBatteryC"/>
+            #end if
+            #if $month($data_binding='davisconsolehealthapi_binding').rssiC.has_data
+            <img src="monthsignalC.png"        alt="$obs.label.rssiC"/>
+            #end if
+            #if $month($data_binding='davisconsolehealthapi_binding').batteryCurrentC.has_data
+            <img src="monthcurrentConsole.png"        alt="$obs.label.batteryCurrentC"/>
+            #end if
+            #if $month($data_binding='davisconsolehealthapi_binding').batteryTempC.has_data
+            <img src="monthtempBatConsole.png"        alt="$obs.label.batteryTempC"/>
+            #end if
+          </div>
+          <div id="history_year" class="plot_container" style="display:none">
+            #if $year($data_binding='davisconsolehealthapi_binding').consoleBatteryC.has_data
+            <img src="yearvoltConsole.png"        alt="$obs.label.consoleBatteryC"/>
+            #end if
+            #if $year($data_binding='davisconsolehealthapi_binding').rssiC.has_data
+            <img src="yearsignalC.png"        alt="$obs.label.rssiC"/>
+            #end if
+            #if $year($data_binding='davisconsolehealthapi_binding').batteryCurrentC.has_data
+            <img src="yearcurrentConsole.png"        alt="$obs.label.batteryCurrentC"/>
+            #end if
+            #if $year($data_binding='davisconsolehealthapi_binding').batteryTempC.has_data
+            <img src="yeartempBatConsole.png"        alt="$obs.label.batteryTempC"/>
+            #end if
+          </div>
+        </div>
+      </div>
+
+      #include "about.inc"
+    </div>
+
+  </body>
+</html>
