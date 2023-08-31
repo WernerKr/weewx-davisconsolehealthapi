@@ -14,7 +14,7 @@ class DavisConsoleHealthAPIInstaller(ExtensionInstaller):
         super(DavisConsoleHealthAPIInstaller, self).__init__(
             version='0.30',
             name='davisconsolehealthapi',
-            description='Collect and display station health information from the Davis Console API.',
+            description='Collect and display station health information from the Davis Weatherlink Console 6313 API.',
             author='Krenn Werner',
             author_email='',
             data_services='user.davisconsolehealthapi.DavisConsoleHealthAPI',
@@ -24,14 +24,12 @@ class DavisConsoleHealthAPIInstaller(ExtensionInstaller):
                     'station_id': '99999',
                     'api_key': 'abcdefghijklmnopqrstuvwzyx123456',
                     'api_secret': '123456abcdefghijklmnopqrstuvwxyz',
-                    '#max_age': 'None - default = 2592000',
+                    'max_age': 'None',
                     'packet_log': '0',
-                    '#packet_log': '0= first check and log available sensortypes once at start,  5= log all (packets ...)',
                 },
                 'Engine': {
                     'Services': {
                         'data_services': 'user.davisconsolehealthapi.DavisConsoleHealthAPI,',
-                        '#data_services': 'user.davisconsolehealthapi.DavisConsoleHealthAPI,'
                     }
                 },
                 'DataBindings': {
@@ -46,6 +44,17 @@ class DavisConsoleHealthAPIInstaller(ExtensionInstaller):
                     'davisconsolehealthapi_sqlite': {
                         'database_type': 'SQLite',
                         'database_name': 'davisconsolehealthapi.sdb'}
+                },
+                'Accumulator': {
+                    'consoleRadioVersionC': {
+                        'accumulator': 'firstlast',
+                        'extractor': 'last'},
+                    'consoleSwVersionC': {
+                        'accumulator': 'firstlast',
+                        'extractor': 'last'},
+                    'consoleOsVersionC': {
+                        'accumulator': 'firstlast',
+                        'extractor': 'last'}
                 },
                 'StdReport': {
                     'DavisConsoleHealth': {
