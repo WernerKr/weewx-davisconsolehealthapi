@@ -151,7 +151,7 @@ skins/healthc
 
 
 The necessary file are there stored during the installation.
-Also the stanza in the weeewx.conf
+Also the stanza in the weewx.conf
 
         [StdReport]
           [[DavisCOnsoleHealth]]
@@ -172,5 +172,7 @@ This should give you a result like this:
 
 ***In all cases, note that you have to specify the database binding as `davisconsolehealthapi_binding` 
 whenever you are referencing the DavisHealthAPI data!!*** 
+
 Take a look at the example files to see how that's been done so you can adapt it for your own purposes.
+
 https://www.pc-wetterstation.de/wetter/weewx/healthc/index.html
