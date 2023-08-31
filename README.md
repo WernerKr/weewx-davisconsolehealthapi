@@ -50,9 +50,9 @@ Right now, the service records the following information from the Davis Console 
 ## Installation
 Install the extension:
 
-`sudo wee_extension --install davisconsolehealthapi.zip`
-or 
-`sudo wee_extension --install=davisconsolehealthapi.zip --config=/etc/weewx1/weewx.conf`
+ `sudo wee_extension --install davisconsolehealthapi.zip`
+ or 
+ `sudo wee_extension --install=davisconsolehealthapi.zip --config=/etc/weewx1/weewx.conf`
 
 ## Configuration
 By default, the installer installs `davisconsolehealthapi` as a service, allowing your station to keep collecting weather information via its usual driver. 
@@ -87,6 +87,7 @@ Example/Settings in the weewx.conf
         data_services = user.davisconsolehealthapi.DavisConsoleHealthAPI,
 
  [davishealthapi]
+
     data_binding = davisconsolehealthapi_binding
     station_id = ?????
     packet_log = 0
@@ -100,6 +101,7 @@ Example/Settings in the weewx.conf
   ##packet_log = 5 -> Log all current received Data "c_data: %s" % data
 
  [Accumulator]
+
    [[consoleRadioVersionC]]
         accumulator = firstlast
         extractor = last
