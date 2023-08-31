@@ -60,29 +60,33 @@ It runs during every archive interval and inserts data into its own SQL database
 
 Example/Settings in the weewx.conf
 
-[StdReport]
+ [StdReport]
+
     [[DavisConsoleHealth]]
         HTML_ROOT = /var/www/html/weewx/healthc
         enable = true
         skin = healthc
 
-[DataBindings]
+ [DataBindings]
+
     [[davisconsolehealthapi_binding]]
         database = davisconsolehealthapi_sqlite
         table_name = archive
         manager = weewx.manager.DaySummaryManager
         schema = user.davisconsolehealthapi.schema
 
-[Databases]
+ [Databases]
+
     [[davisconsolehealthapi_sqlite]]
         database_type = SQLite
         database_name = davisconsolehealthapi.sdb
 
-[Engine]
+ [Engine]
+
     [[Services]]
         data_services = user.davisconsolehealthapi.DavisConsoleHealthAPI,
 
-[davishealthapi]
+ [davishealthapi]
     data_binding = davisconsolehealthapi_binding
     station_id = ?????
     packet_log = 0
@@ -95,7 +99,7 @@ Example/Settings in the weewx.conf
   ##packet_log = 3 -> Log all received packets "packet: %s" % record
   ##packet_log = 5 -> Log all current received Data "c_data: %s" % data
 
-[Accumulator]
+ [Accumulator]
    [[consoleRadioVersionC]]
         accumulator = firstlast
         extractor = last
