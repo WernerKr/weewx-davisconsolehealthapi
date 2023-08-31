@@ -1,8 +1,8 @@
 # weewx-davisconsolehealthapi
-Collect and display station health information from the new Davis Console API
+Collect and display station health information from the new Davis Weatherlink Console 6313 API
 
-Weewx service that pulls device health (telemetry) information from Davis Instruments weather Console. 
-I made this extension for users like me who have the new DAVIS Console. 
+Weewx service that pulls device health (telemetry) information from Davis Instruments Weatherlink Console 6313. 
+I made this extension for users like me who have the new DAVIS Weatherlink Console 6313. 
 
 The code makes one API calls per archive period: 
 to the "current" v2 API, which contains values like the console battery status and firmware version. 
@@ -17,50 +17,72 @@ See here: https://weatherlink.github.io/v2-api/data-permissions
 ## Data
 Right now, the service records the following information from the Davis Console API (here with values):
 
-"battery_voltage":4226
-"wifi_rssi":-56
-"console_radio_version":"10.3.2.90"
-"console_api_level":28
-"queue_kilobytes":4
-"free_mem":699453
-"system_free_space":747118
-"charger_plugged":1
-"battery_percent":100
-"local_api_queries":null
-"health_version":1
-"link_uptime":31130
-"rx_kilobytes":20465563
-"console_sw_version":"1.2.13"
-"connection_uptime":31113
-"os_uptime":1187518
-"battery_condition":2
-"internal_free_space":2215120
-"battery_current":0.003
-"battery_status":5
-"database_kilobytes":108347
-"battery_cycle_count":1
-"console_os_version":"1.2.11"
-"bootloader_version":2
-"clock_source":2
-"app_uptime":1186355
-"battery_temp":33		it's not know is this is °C or what else (seems to be °C)
-"tx_kilobytes":181662
+  "battery_voltage":4226
+  "wifi_rssi":-56
+  "console_radio_version":"10.3.2.90"
+  "console_api_level":28
+  "queue_kilobytes":4
+  "free_mem":699453
+  "system_free_space":747118
+  "charger_plugged":1
+  "battery_percent":100
+  "local_api_queries":null
+  "health_version":1
+  "link_uptime":31130
+  "rx_kilobytes":20465563
+  "console_sw_version":"1.2.13"
+  "connection_uptime":31113
+  "os_uptime":1187518
+  "battery_condition":2
+  "internal_free_space":2215120
+  "battery_current":0.003
+  "battery_status":5
+  "database_kilobytes":108347
+  "battery_cycle_count":1
+  "console_os_version":"1.2.11"
+  "bootloader_version":2
+  "clock_source":2
+  "app_uptime":1186355
+  "tx_kilobytes":181662
+  "battery_temp":33                  it's not known if this is °C or what else (seems to be °C)
 
 
 ## Installation
 Install the extension:
 
 `sudo wee_extension --install davisconsolehealthapi.zip`
-
+or 
+`sudo wee_extension --install=davisconsolehealthapi.zip --config=/etc/weewx1/weewx.conf`
 
 ## Configuration
 By default, the installer installs `davisconsolehealthapi` as a service, allowing your station to keep collecting weather information via its usual driver. 
 It runs during every archive interval and inserts data into its own SQL database.
 
-Example in the weewx.conf
+Example/Settings in the weewx.conf
+
+[StdReport]
+    [[DavisConsoleHealth]]
+        HTML_ROOT = /var/www/html/weewx/healthc
+        enable = true
+        skin = healthc
+
+[DataBindings]
+    [[davisconsolehealthapi_binding]]
+        database = davisconsolehealthapi_sqlite
+        table_name = archive
+        manager = weewx.manager.DaySummaryManager
+        schema = user.davisconsolehealthapi.schema
+
+[Databases]
+    [[davisconsolehealthapi_sqlite]]
+        database_type = SQLite
+        database_name = davisconsolehealthapi.sdb
+
+[Engine]
+    [[Services]]
+        data_services = user.davisconsolehealthapi.DavisConsoleHealthAPI,
 
 [davishealthapi]
-
     data_binding = davisconsolehealthapi_binding
     station_id = ?????
     packet_log = 0
@@ -68,10 +90,22 @@ Example in the weewx.conf
     api_key = ????????????????????????????????
     api_secret = ????????????????????????????????
 
-##packet_log = 0 -> none logging - log once: "Found current data from data ID %s Struc"
-##packet_log = 1 -> "Found current data from data ID %s Sensortype %s" 
-##packet_log = 3 -> Log all received packets "packet: %s" % record
-##packet_log = 5 -> Log all current received Data "c_data: %s" % data
+  ##packet_log = 0 -> none logging - log once: "Found current data from data ID %s Struc"
+  ##packet_log = 1 -> "Found current data from data ID %s Sensortype %s" 
+  ##packet_log = 3 -> Log all received packets "packet: %s" % record
+  ##packet_log = 5 -> Log all current received Data "c_data: %s" % data
+
+[Accumulator]
+   [[consoleRadioVersionC]]
+        accumulator = firstlast
+        extractor = last
+   [[consoleSwVersionC]]
+        accumulator = firstlast
+        extractor = last
+   [[consoleOsVersionC]]
+        accumulator = firstlast
+        extractor = last
+
 
 ### API keys
 Once installed, you need to add your Davis WeatherLink Cloud API key, station ID, and secret. 
@@ -126,3 +160,4 @@ This should give you a result like this:
 ***In all cases, note that you have to specify the database binding as `davisconsolehealthapi_binding` 
 whenever you are referencing the DavisHealthAPI data!!*** 
 Take a look at the example files to see how that's been done so you can adapt it for your own purposes.
+https://www.pc-wetterstation.de/wetter/weewx/healthc/index.html
