@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-weewx module that records health information from a Davis weather station using
+weewx module that records health information from a Davis Weatherlink Console 6313 using
 the v2 API.
 
 Modified from the davishealthapi driver by Krenn Werner
@@ -42,6 +42,16 @@ Settings in weewx.conf:
 #packet_log = 3 -> Log all received packets "packet: %s" % record
 #packet_log = 5 -> Log all current received Data "c_data: %s" % data
 
+[Accumulator]
+   [[consoleRadioVersionC]]
+        accumulator = firstlast
+        extractor = last
+   [[consoleSwVersionC]]
+        accumulator = firstlast
+        extractor = last
+   [[consoleOsVersionC]]
+        accumulator = firstlast
+        extractor = last
 
 """
 
