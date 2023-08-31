@@ -44,7 +44,7 @@ Right now, the service records the following information from the Davis Console 
   "clock_source":2
   "app_uptime":1186355
   "tx_kilobytes":181662
-  "battery_temp":33                  it's not known if this is °C or what else (seems to be °C)
+  "battery_temp":33                  it's not known if this is Â°C or what else (seems to be Â°C)
 
 
 ## Installation
@@ -168,6 +168,7 @@ In skin.conf:
             [[[[rssiC]]]]
 
 This should give you a result like this:
+![dayvoltConsole](https://github.com/WernerKr/weewx-davisconsolehealthapi/assets/93549501/55123266-1d21-43ce-9eb7-8ae287dcd140)
 
 
 ***In all cases, note that you have to specify the database binding as `davisconsolehealthapi_binding` 
@@ -176,3 +177,4 @@ whenever you are referencing the DavisHealthAPI data!!***
 Take a look at the example files to see how that's been done so you can adapt it for your own purposes.
 
 https://www.pc-wetterstation.de/wetter/weewx/healthc/index.html
+![Davis_Console](https://github.com/WernerKr/weewx-davisconsolehealthapi/assets/93549501/e29d93e7-5f78-446d-a926-f46719b4c70c)
