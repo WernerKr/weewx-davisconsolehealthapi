@@ -3,7 +3,7 @@
 weewx module that records health information from a Davis Weatherlink Console 6313 using
 the v2 API.
 
-Modified from the davishealthapi driver by Krenn Werner
+Modified from the davishealthapi driver by Werner Krenn
 
 Settings in weewx.conf:
 
@@ -32,11 +32,10 @@ Settings in weewx.conf:
 [davisconsolehealthapi]
     data_binding = davisconsolehealthapi_binding
     station_id = 123456
-    packet_log = 0
-    max_age = None
     api_key = abcdefghijklmnopqrstuvwzyx123456
     api_secret = 123456abcdefghijklmnopqrstuvwxyz
-
+    max_age = None	# default = 2592000
+    packet_log = 0
 #packet_log = 0 -> none logging - log once: "Found current data from data ID %s Struc"
 #packet_log = 1 -> "Found current data from data ID %s Sensortype %s" 
 #packet_log = 3 -> Log all received packets "packet: %s" % record
