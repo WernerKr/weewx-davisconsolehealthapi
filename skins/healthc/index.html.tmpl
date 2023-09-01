@@ -40,6 +40,12 @@
             #if $day($data_binding='davisconsolehealthapi_binding').consoleBatteryC.has_data
             <img src="dayvoltConsole.png"        alt="$obs.label.consoleBatteryC"/>
             #end if
+            #if $day($data_binding='davisconsolehealthapi_binding').batteryPercentC.has_data
+             #set $test = $getattr($current($max_delta=3600,$data_binding='davisconsolehealthapi_binding'), "batteryPercentC").raw
+             #if $test != 100
+              <img src="daybatteryPercentConsole.png"        alt="$obs.label.batteryPercentC"/>
+             #end if
+            #end if
             #if $day($data_binding='davisconsolehealthapi_binding').rssiC.has_data
             <img src="daysignalC.png"        alt="$obs.label.rssiC"/>
             #end if
